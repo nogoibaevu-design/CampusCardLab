@@ -48,16 +48,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CampusCardScreen() {
-    // Exercise 6: try Arrangement.SpaceBetween here to push header / schedule / actions apart
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
         verticalArrangement = Arrangement.Top,
-        // Exercise 1: title block is centered; schedule stays full-width below
+        // заголовок по центру
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Title block (centered by parent horizontalAlignment)
         Text(
             text = "Campus Card",
             style = MaterialTheme.typography.headlineMedium
@@ -67,7 +65,7 @@ fun CampusCardScreen() {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Header: avatar + name/status
+        // шапка: аватар и имя
         ProfileHeader(
             name = "Ada Lovelace",
             status = "In class · Building B"
@@ -75,7 +73,7 @@ fun CampusCardScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Schedule section — left-aligned relative to the screen
+        // расписание слева на всю ширину
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.Start
@@ -97,7 +95,7 @@ fun CampusCardScreen() {
                 title = "MATH210 Calculus",
                 room = "A-204"
             )
-            // Exercise 4: long title to demonstrate weight
+            // длинное название для проверки weight
             ScheduleRow(
                 time = "14:00",
                 title = "Soft Skills and Professional Communication Workshop",
@@ -107,26 +105,23 @@ fun CampusCardScreen() {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Bottom action bar
-        // Exercise 2: final choice = SpaceBetween
+        // кнопки по краям
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = { /* Map */ }) {
+            Button(onClick = { }) {
                 Text("Map")
             }
-            OutlinedButton(onClick = { /* QR */ }) {
+            OutlinedButton(onClick = { }) {
                 Text("Show QR")
             }
         }
     }
 }
 
-/**
- * Exercise 5 — extracted header composable.
- */
+// аватар + имя + статус
 @Composable
 fun ProfileHeader(name: String, status: String) {
     Row(
@@ -134,7 +129,6 @@ fun ProfileHeader(name: String, status: String) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Avatar placeholder
         Box(
             modifier = Modifier
                 .size(56.dp)
@@ -154,11 +148,7 @@ fun ProfileHeader(name: String, status: String) {
     }
 }
 
-/**
- * Exercise 5 — extracted schedule row.
- * Exercise 3: verticalAlignment can be Top or CenterVertically.
- * Exercise 4: title uses weight(1f).
- */
+// одна строка расписания: время | предмет | аудитория
 @Composable
 fun ScheduleRow(
     time: String,
@@ -169,8 +159,6 @@ fun ScheduleRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp),
-        // Exercise 3: Top makes the larger time text sit higher;
-        // CenterVertically lines everything up.
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
